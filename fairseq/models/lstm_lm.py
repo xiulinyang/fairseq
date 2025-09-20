@@ -140,3 +140,14 @@ def base_architecture(args):
         args, "adaptive_softmax_cutoff", "10000,50000,200000"
     )
     args.residuals = getattr(args, "residuals", False)
+
+
+@register_model_architecture("lstm_lm", "lstm_small_lm")
+def lstm_small(args):
+    args.decoder_embed_dim = getattr(args, "decoder_embed_dim", 128)
+    args.decoder_layers = getattr(args, "decoder_layers", 2)
+    args.decoder_out_embed_dim = getattr(args, "decoder_out_embed_dim", 128)
+    args.decoder_hidden_size = getattr(
+        args, "decoder_hidden_size", 144
+    )
+    base_architecture(args)

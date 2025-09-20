@@ -436,6 +436,19 @@ def transformer_lm_baevski_gbw(args):
     transformer_lm_big(args)
 
 
+@register_model_architecture("transformer_lm", "transformer_lm_small")
+def transformer_lm_gpt2_tiny(args):
+    args.decoder_embed_dim = safe_getattr(args, "decoder_embed_dim", 128)
+    args.decoder_ffn_embed_dim = safe_getattr(args, "decoder_ffn_embed_dim", 512)
+    args.decoder_layers = safe_getattr(args, "decoder_layers", 2)
+    args.decoder_attention_heads = safe_getattr(args, "decoder_attention_heads", 2)
+    args.dropout = safe_getattr(args, "dropout", 0.1)
+    args.attention_dropout = safe_getattr(args, "attention_dropout", 0.1)
+    args.activation_fn = safe_getattr(args, "activation_fn", "gelu")
+    base_lm_architecture(args)
+
+
+
 @register_model_architecture("transformer_lm", "transformer_lm_gpt")
 def transformer_lm_gpt(args):
     args.decoder_embed_dim = safe_getattr(args, "decoder_embed_dim", 768)
